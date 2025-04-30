@@ -9,7 +9,7 @@ import StarshipInput from "./components/StarshipInput";
 function App() {
     
     
-    return <div>
+    return <div className="app">
       <h1>STAR🪐WARS🚀ZEUGS</h1>
         <StarshipInput/>
       <main>
