@@ -2,6 +2,7 @@
 import express from 'express';
 import { IPerson } from './models/IPerson';
 import { IStarship } from './models/IStarship';
+import { IPlanet } from './models/IPlanet';
 import cors from 'cors';
 
 const app =  express();
@@ -32,6 +33,19 @@ const starships: IStarship[] = [
     { id: 9, name: 'Naboo N-1 Starfighter', speed: 1100, crew: 1 }
 ];
 
+const planets: IPlanet[] = [
+    { id: 1, name: 'Tatooine', terrain: 'desert', population: 200000 },
+    { id: 2, name: 'Alderaan', terrain: 'grasslands', population: 2000000000 },
+    { id: 3, name: 'Hoth', terrain: 'ice', population: 0 },
+    { id: 4, name: 'Dagobah', terrain: 'swamp', population: 0 },
+    { id: 5, name: 'Bespin', terrain: 'gas giant', population: 6000000 },
+    { id: 6, name: 'Endor', terrain: 'forest', population: 30000000 },
+    { id: 7, name: 'Naboo', terrain: 'grasslands', population: 4500000000 },
+    { id: 8, name: 'Kamino', terrain: 'ocean', population: 1000000000 },
+    { id: 9, name: 'Geonosis', terrain: 'rocky', population: 1000000000 }
+]
+
+
 app.get('/people', (req, res) => {
   res.json(people);
 });
@@ -39,6 +53,19 @@ app.get('/people', (req, res) => {
 app.get('/starships', (req, res) => {
   res.json(starships);
 });
+
+
+app.get('/planets', (req, res) => {
+    res.json(planets);
+  });
+
+app.post('/starships', (req, res) =>{
+    const newStarship: IStarship = req.body;
+    starships.push(newStarship);
+    res.send(`Starship ${starship.name} added`);
+})
+
+
 
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);

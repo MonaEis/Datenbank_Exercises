@@ -1,76 +1,21 @@
-import  { useEffect, useState } from "react";
+import PeopleFetch from "./components/PeopleFetch";
+import PlanetFetch from "./components/PlanetFetch";
+import StarshipFetch from "./components/StarshipFetch";
+import StarshipInput from "./components/StarshipInput";
 
-interface Starship {
-  id: number;
-  name: string;
-  speed?: number;
-  crew?: number;
-}
 
-interface Person {
-  id: number;
-  name: string;
-  homeplanet: string;
-  birthyear?: string;
-}
+
 
 function App() {
-    const [people, setPeople] = useState<Person[]>([]);
-    const [starship, setStarship] = useState<Starship[]>([]);
-
-    useEffect(() => {
-        fetch("http://localhost:3000/people").then((response) =>
-            response
-                .json()
-                .then((data) => {
-                    setPeople(data);
-                    console.log(data)
-                })
-                .catch((error) => {
-                    console.error("Error fetching data:", error);
-                })
-        );
-    }, []);
-
-    useEffect(() => {
-      fetch("http://localhost:3000/starships").then((response) =>
-          response
-              .json()
-              .then((data) => {
-                  setStarship(data);
-                  console.log(data)
-              })
-              .catch((error) => {
-                  console.error("Error fetching data:", error);
-              })
-      );
-  }, []);
-
-
+    
+    
     return <div>
       <h1>STAR🪐WARS🚀ZEUGS</h1>
+        <StarshipInput/>
       <main>
-      <div>
-        <h2>People</h2>
-        {people.map((person) => (
-          <div className="container" key={person.id}>
-            <h3>{person.name}</h3>
-            <p>Homeplanet: {person.homeplanet}</p>
-            <p>Birthyear: {person.birthyear}</p>
-            </div>
-        ))}
-      </div>
-      <div>
-        <h2>Starships</h2>
-        {starship.map((ship) => (
-          <div className="container" key={ship.id}>
-            <h3>{ship.name}</h3>
-            <p>Speed: {ship.speed}</p>
-            <p>Crew Capacity: {ship.crew}</p>
-            
-            </div>
-        ))}
-      </div>
+      <PeopleFetch/>
+     <StarshipFetch/>
+     <PlanetFetch/>
     </main>
       
       </div>
